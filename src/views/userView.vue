@@ -33,14 +33,15 @@
     :value="user.email"
     @click="handerEidt('邮箱', user.email ?? '', 'email')"
   />
-  <van-cell title="创建时间" ::value="user.createTime.toString" />
+  <van-cell title="创建时间" :value="createTime" />
 </template>
 <script setup lang="ts" name="user">
+import Axios from '@/plugins/myAxios'
 import { type User } from '@/types/index'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
-const user: User = {
+const user = ref<User>({
   id: 1,
   userName: '鱼皮',
   userAccount: 'dogYupi',
@@ -51,14 +52,21 @@ const user: User = {
   tags: '123234',
   email: '12345@qq.com',
   createTime: new Date()
-}
+})
+onMounted(async () => {
+  const loginUser = await Axios.get('/user/get/login')
+  console.log(loginUser)
+  user.value = loginUser.data
+  console.log(user.value.createTime)
+})
+const createTime = user.value.createTime.toLocaleDateString()
 // eidtKey 要更新的属性，originValue 原来的值，eidtColumn  要更新的列名
-const handerEidt = (editKey: string, originValue: any, editColumn: string) => {
+const handerEidt = (editKey: string, editValue: any, editColumn: string) => {
   router.push({
     path: '/user/eidt',
     query: {
       editKey,
-      originValue,
+      editValue,
       editColumn
     }
   })

@@ -36,7 +36,7 @@ onMounted(async () => {
     paramsSerializer: (params) => qs.stringify(params, { arrayFormat: 'comma' })
   })
     .then(function (response) {
-      return response.data.data
+      return response.data
     })
     .catch(function (error) {
       console.log(error)

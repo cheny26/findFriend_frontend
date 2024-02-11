@@ -1,12 +1,14 @@
 import axios from 'axios'
 const Axios = axios.create({
   baseURL: 'http://localhost:8080/',
-  timeout: 1000
+  timeout: 1000,
+  withCredentials: true
 })
 
 // 添加请求拦截器
 Axios.interceptors.request.use(
   function (config) {
+    console.log('发送的请求是', config)
     return config
   },
   function (error) {
@@ -20,7 +22,7 @@ Axios.interceptors.response.use(
   function (response) {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
-    return response
+    return response.data
   },
   function (error) {
     // 超出 2xx 范围的状态码都会触发该函数。

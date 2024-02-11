@@ -5,6 +5,7 @@ import user from '@/views/userView.vue'
 import search from '@/views/searchView.vue'
 import userEidt from '@/views/UserEidtView.vue'
 import searchResult from '../views/searchResultView.vue'
+import login from '../views/loginView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/searchResult',
       name: 'searchResult',
       component: searchResult
+    },
+    {
+      path: '/user/login',
+      name: 'login',
+      component: login
     }
   ]
 })

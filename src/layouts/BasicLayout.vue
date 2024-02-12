@@ -10,7 +10,10 @@
       <van-icon name="search" size="18" />
     </template>
   </van-nav-bar>
-  <RouterView></RouterView>
+  <div style="padding-bottom: 50px">
+    <RouterView></RouterView>
+  </div>
+
   <van-tabbar v-model="active" router="true">
     <van-tabbar-item name="home" icon="home-o" to="/">首页</van-tabbar-item>
     <van-tabbar-item name="team" icon="search" to="/team">队伍</van-tabbar-item>

@@ -1,6 +1,8 @@
 <template>
   <div class="img">
-    <van-image round width="6rem" height="6rem" :src="user.userAvatar" />
+    <van-uploader :after-read="afterRead">
+      <van-image round width="6rem" height="6rem" :src="user.userAvatar" />
+    </van-uploader>
   </div>
   <van-cell title="账号" :value="user.userAccount" />
   <van-cell
@@ -55,9 +57,7 @@ const user = ref<User>({
 })
 onMounted(async () => {
   const loginUser = await Axios.get('/user/get/login')
-  console.log(loginUser)
   user.value = loginUser.data
-  console.log(user.value.createTime)
 })
 const createTime = user.value.createTime.toLocaleDateString()
 // eidtKey 要更新的属性，originValue 原来的值，eidtColumn  要更新的列名
@@ -70,6 +70,12 @@ const handerEidt = (editKey: string, editValue: any, editColumn: string) => {
       editColumn
     }
   })
+}
+
+const afterRead = (file: File) => {
+  // 此时可以自行将文件上传至服务器
+  console.log(file)
+ 
 }
 </script>
 <style>

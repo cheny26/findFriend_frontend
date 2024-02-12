@@ -1,7 +1,7 @@
 import axios from 'axios'
 const Axios = axios.create({
   baseURL: 'http://localhost:8080/',
-  timeout: 1000,
+  timeout: 2000,
   withCredentials: true
 })
 
@@ -22,6 +22,7 @@ Axios.interceptors.response.use(
   function (response) {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
+    console.log('接收的响应是', response)
     return response.data
   },
   function (error) {
